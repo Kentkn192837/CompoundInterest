@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test</title>
+</head>
+<body>
+<label>  資金:<input type="number" id="MyMoney"></label><br>
+<label> 利率(%):<input type="number" id="Interest"></label><br>
+<label>運用年数:<input type="number" id="Year"></label><br>
+<input type="submit" value="算出" id="submit">
+<div id="result"></div>
+<script>
+function recursive(money, interest, n)
+{
+    if (n <= 0) return money;
+    money *= interest;
+    n--;
+    return recursive(money, interest, n);
+}
+
+function show(content)
+{
+    const result = document.getElementById("result");
+    console.log("content: ", content);
+    result.innerHTML = content.toFixed();
+}
+
+function calc()
+{
+    const MyMoney = document.getElementById("MyMoney").value;
+    const Interest = document.getElementById("Interest").value;
+    const n = document.getElementById("Year").value;
+
+    let interest = Interest / 100 + 1;
+    console.log("MyMoney: ", MyMoney)
+    console.log("Interest: ", interest)
+    console.log("n: ", n)
+
+    let result = recursive(MyMoney, interest, n);
+    show(result);
+}
+
+const button = document.getElementById("submit");
+button.onclick = calc;
+</script>
+</body>
+</html>
